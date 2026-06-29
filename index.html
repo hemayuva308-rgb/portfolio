@@ -65,6 +65,9 @@ body{font-family:"DM Sans",sans-serif;background:var(--white);color:var(--ink);o
 .stagger-children.on > *:nth-child(5){opacity:1;transform:translateY(0);transition-delay:0.4s;}
 .stagger-children.on > *:nth-child(6){opacity:1;transform:translateY(0);transition-delay:0.5s;}
 .stagger-children.on > *:nth-child(7){opacity:1;transform:translateY(0);transition-delay:0.6s;}
+.stagger-children.on > *:nth-child(8){opacity:1;transform:translateY(0);transition-delay:0.7s;}
+.stagger-children.on > *:nth-child(9){opacity:1;transform:translateY(0);transition-delay:0.8s;}
+.stagger-children.on > *:nth-child(10){opacity:1;transform:translateY(0);transition-delay:0.9s;}
 
 /* ══════════════════════════════════════════
    NAVIGATION
@@ -459,14 +462,17 @@ section{padding:7.5rem 6%;}
 }
 .svc-step:last-child{border-bottom:none;}
 
-/* Cascade offsets — the "staircase" effect */
+/* Cascade offsets — the "staircase" effect for 10 items */
 .svc-step:nth-child(1){margin-left:0;}
 .svc-step:nth-child(2){margin-left:3.5rem;}
 .svc-step:nth-child(3){margin-left:7rem;}
 .svc-step:nth-child(4){margin-left:9rem;}
 .svc-step:nth-child(5){margin-left:6rem;}
 .svc-step:nth-child(6){margin-left:3rem;}
-.svc-step:nth-child(7){ margin-left: 0rem; }
+.svc-step:nth-child(7){margin-left:0rem;}
+.svc-step:nth-child(8){margin-left:3.5rem;}
+.svc-step:nth-child(9){margin-left:6rem;}
+.svc-step:nth-child(10){margin-left:2rem;}
 .svc-step:hover{padding-left:1rem;}
 
 /* Step index circle */
@@ -505,7 +511,7 @@ section{padding:7.5rem 6%;}
   max-width:460px;
 }
 
-/* Pricing — THE TAG TO EDIT */
+/* Pricing */
 .svc-price-col{
   display:flex;flex-direction:column;align-items:flex-end;
   gap:0.6rem;flex-shrink:0;
@@ -850,6 +856,100 @@ footer{
 .lb-close{position:absolute;top:1.2rem;right:1.2rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);cursor:pointer;color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
 .lb-close:hover{background:rgba(255,255,255,0.22);}
 
+/* ══════════════════════════════════════════
+   PROJECT SCROLL-STACK ANIMATION
+══════════════════════════════════════════ */
+.proj-card{
+  transition:
+    transform 0.5s var(--ease),
+    box-shadow 0.5s var(--ease),
+    border-color 0.25s,
+    opacity 0.4s ease,
+    scale 0.35s ease;
+}
+/* Row-based scroll reveal: cards animate upward in groups of 3 */
+.proj-card.proj-stack-hidden{
+  opacity:0;
+  transform:translateY(60px) scale(0.96);
+}
+.proj-card.proj-stack-visible{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+/* Stagger within each row */
+.proj-card.proj-stack-visible:nth-child(3n+1){transition-delay:0s;}
+.proj-card.proj-stack-visible:nth-child(3n+2){transition-delay:0.1s;}
+.proj-card.proj-stack-visible:nth-child(3n+3){transition-delay:0.2s;}
+
+/* ══════════════════════════════════════════
+   VENTURES / STARTUPS SECTION
+══════════════════════════════════════════ */
+#ventures{background:var(--white);}
+.ventures-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:2rem;
+  margin-top:1rem;
+}
+.venture-card{
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2.4rem 2.2rem;
+  background:var(--surface);
+  position:relative;
+  overflow:hidden;
+  transition:transform 0.4s var(--ease),box-shadow 0.4s var(--ease),border-color 0.3s;
+}
+.venture-card::before{
+  content:"";position:absolute;
+  top:-60px;right:-60px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(10,10,10,0.028);
+  pointer-events:none;
+}
+.venture-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 52px rgba(0,0,0,0.1);
+  border-color:#d0d0ca;
+}
+.venture-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:50px;padding:0.3rem 0.9rem;
+  font-size:0.62rem;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--ink-muted);
+  margin-bottom:1.4rem;
+}
+.venture-badge-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--ink);flex-shrink:0;
+}
+.venture-name{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(1.8rem,2.8vw,2.4rem);
+  font-weight:700;line-height:1.05;letter-spacing:-1px;
+  margin-bottom:0.5rem;
+}
+.venture-role{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--ink-muted);
+  margin-bottom:1.1rem;
+}
+.venture-desc{
+  font-size:0.88rem;color:var(--ink-soft);
+  line-height:1.88;margin-bottom:1.5rem;
+}
+.venture-tags{display:flex;gap:0.45rem;flex-wrap:wrap;}
+.venture-tag{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:50px;padding:0.2rem 0.7rem;
+  font-size:0.65rem;font-weight:600;color:var(--ink-muted);
+}
+@media(max-width:768px){
+  .ventures-grid{grid-template-columns:1fr;}
+  .venture-card{padding:2rem 1.8rem;}
+}
+
 </style>
 </head>
 <body>
@@ -860,6 +960,7 @@ footer{
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#ventures">Ventures</a></li>
     <li><a href="#projects">Work</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
@@ -874,6 +975,7 @@ footer{
   <ul>
     <li><a href="#services" onclick="closeMenu()">Services</a></li>
     <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#ventures" onclick="closeMenu()">Ventures</a></li>
     <li><a href="#projects" onclick="closeMenu()">Work</a></li>
     <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
     <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
@@ -896,7 +998,7 @@ footer{
         that convert.
       </h1>
       <div class="hero-rule"></div>
-      <p class="hero-sub">I design &amp; build fast, beautiful websites — from landing pages to full e-commerce stores — for founders and brands that want to stand out.</p>
+      <p class="hero-sub">I design &amp; build fast, beautiful websites — from landing pages to full e-commerce stores. Co-Founder at Intasia &amp; founder at Quix, helping founders and brands stand out.</p>
       <div class="hero-cta-row">
         <a href="#contact" class="btn-primary">
           Start a Project <span class="arr">→</span>
@@ -974,12 +1076,27 @@ footer{
         <div class="svc-index">01</div>
         <div class="svc-body">
           <span class="svc-label">Web Development</span>
-          <div class="svc-name">Landing Pages</div>
+          <div class="svc-name">Static website</div>
           <p class="svc-desc">High-converting single-page websites designed to capture leads, showcase products, and drive action. Fully responsive &amp; optimised.</p>
         </div>
         <div class="svc-price-col">
           
-          <div class="svc-price">2999</div>
+          <div class="svc-price">3999-4999</div>
+          <span class="svc-price-note">Starting at</span>
+          <a href="#contact" class="svc-book">Book Now</a>
+        </div>
+      </div>
+      <!-- 02 E-Commerce Stores -->
+      <div class="svc-step">
+        <div class="svc-index">02</div>
+        <div class="svc-body">
+          <span class="svc-label">Web Development</span>
+          <div class="svc-name">Dynamic website</div>
+          <p class="svc-desc">Full online stores with product pages, cart, and checkout flows. Built on Shopify or custom — optimised for trust and sales conversion.</p>
+        </div>
+        <div class="svc-price-col">
+          
+          <div class="svc-price">9999-19999</div>
           <span class="svc-price-note">Starting at</span>
           <a href="#contact" class="svc-book">Book Now</a>
         </div>
@@ -987,7 +1104,37 @@ footer{
 
       <!-- 02 E-Commerce Stores -->
       <div class="svc-step">
-        <div class="svc-index">02</div>
+        <div class="svc-index">03</div>
+        <div class="svc-body">
+          <span class="svc-label">Web Development</span>
+          <div class="svc-name">Business Websites</div>
+          <p class="svc-desc">Full online stores with product pages, cart, and checkout flows. Built on Shopify or custom — optimised for trust and sales conversion.</p>
+        </div>
+        <div class="svc-price-col">
+          
+          <div class="svc-price">14999-24999</div>
+          <span class="svc-price-note">Starting at</span>
+          <a href="#contact" class="svc-book">Book Now</a>
+        </div>
+      </div>
+<!-- 02 E-Commerce Stores -->
+      <div class="svc-step">
+        <div class="svc-index">04</div>
+        <div class="svc-body">
+          <span class="svc-label">Web Development</span>
+          <div class="svc-name">Blog Websites</div>
+          <p class="svc-desc">Full online stores with product pages, cart, and checkout flows. Built on Shopify or custom — optimised for trust and sales conversion.</p>
+        </div>
+        <div class="svc-price-col">
+          
+          <div class="svc-price">14999-24999</div>
+          <span class="svc-price-note">Starting at</span>
+          <a href="#contact" class="svc-book">Book Now</a>
+        </div>
+      </div>
+      <!-- 02 E-Commerce Stores -->
+      <div class="svc-step">
+        <div class="svc-index">05</div>
         <div class="svc-body">
           <span class="svc-label">Web Development</span>
           <div class="svc-name">E-Commerce Stores</div>
@@ -995,15 +1142,14 @@ footer{
         </div>
         <div class="svc-price-col">
           
-          <div class="svc-price">4999-6999</div>
+          <div class="svc-price">9999-24999</div>
           <span class="svc-price-note">Starting at</span>
           <a href="#contact" class="svc-book">Book Now</a>
         </div>
       </div>
-
       <!-- 03 Portfolio Sites -->
       <div class="svc-step">
-        <div class="svc-index">03</div>
+        <div class="svc-index">06</div>
         <div class="svc-body">
           <span class="svc-label">Web Development</span>
           <div class="svc-name">Portfolio Sites</div>
@@ -1011,15 +1157,29 @@ footer{
         </div>
         <div class="svc-price-col">
           
-          <div class="svc-price">999</div>
-          <span class="svc-price-note">Starting at</span>
+          <div class="svc-price">2999</div>
+          <span class="svc-price-note">fixed price</span>
           <a href="#contact" class="svc-book">Book Now</a>
         </div>
       </div>
-
+ <!-- 03 Portfolio Sites -->
+      <div class="svc-step">
+        <div class="svc-index">07</div>
+        <div class="svc-body">
+          <span class="svc-label">Web Development</span>
+          <div class="svc-name">Custom CRM</div>
+          <p class="svc-desc">Custom customer relationship management solutions tailored to your business needs.</p>
+        </div>
+        <div class="svc-price-col">
+          
+          <div class="svc-price">39,999 - 99,999</div>
+          <span class="svc-price-note">fixed price</span>
+          <a href="#contact" class="svc-book">Book Now</a>
+        </div>
+      </div>
       <!-- 04 Poster Designs -->
       <div class="svc-step">
-        <div class="svc-index">04</div>
+        <div class="svc-index">08</div>
         <div class="svc-body">
           <span class="svc-label">Graphic Design</span>
           <div class="svc-name">Poster &amp; Canva Designs</div>
@@ -1027,31 +1187,17 @@ footer{
         </div>
         <div class="svc-price-col">
           
-          <div class="svc-price">starts at 149</div>
+          <div class="svc-price">starts at 399</div>
           <span class="svc-price-note">Per design</span>
           <a href="#contact" class="svc-book">Book Now</a>
         </div>
       </div>
 
-      <!-- 05 Figma Designs -->
-      <div class="svc-step">
-        <div class="svc-index">05</div>
-        <div class="svc-body">
-          <span class="svc-label">UI / UX Design</span>
-          <div class="svc-name">Figma UI Designs</div>
-          <p class="svc-desc">Pixel-perfect, developer-ready Figma wireframes and UI mockups — from simple screens to complete design systems with components.</p>
-        </div>
-        <div class="svc-price-col">
-         
-          <div class="svc-price">299</div>
-          <span class="svc-price-note">Per screen / from</span>
-          <a href="#contact" class="svc-book">Book Now</a>
-        </div>
-      </div>
+      
 
       <!-- 06 Logo & Visual Branding -->
       <div class="svc-step">
-        <div class="svc-index">06</div>
+        <div class="svc-index">09</div>
         <div class="svc-body">
           <span class="svc-label">Branding</span>
           <div class="svc-name">Logo &amp; Visual Branding</div>
@@ -1059,7 +1205,7 @@ footer{
         </div>
         <div class="svc-price-col">
          
-          <div class="svc-price">starts at 99</div>
+          <div class="svc-price">starts at 999</div>
           <span class="svc-price-note">Starting at</span>
           <a href="#contact" class="svc-book">Book Now</a>
         </div>
@@ -1067,7 +1213,7 @@ footer{
 
       <!-- 07 ATS-Optimized Visual Resumes -->
       <div class="svc-step">
-        <div class="svc-index">07</div>
+        <div class="svc-index">010</div>
         <div class="svc-body">
           <span class="svc-label">99% ATS Pass | 3x Interview Calls</span>
           <div class="svc-name">ATS-Optimized Visual Resumes</div>
@@ -1136,9 +1282,14 @@ footer{
             <div class="stat-n">100%</div>
             <div class="stat-l">Client Satisfaction</div>
           </div>
+
+          <div class="stat-item">
+            <div class="stat-n">2</div>
+            <div class="stat-l">Startups Founded</div>
+          </div>
         </div>
 
-        <p class="about-para">"Hello, I'm Hema. I'm based in Chennai, currently pursuing my third year in BCA. I've been learning web design since my first year in college and have successfully delivered several projects. I approach my work with the independence of a one-man army. Keeping up with emerging technologies and AI tools is a genuine passion of mine. If a project lands in my hands, I ensure it is completed accurately, responsibly, and within the deadline."</p>
+        <p class="about-para">"Hello, I'm Hema. I'm based in Chennai, currently pursuing my third year in BCA. I've been learning web design since my first year in college and have successfully delivered several projects. I approach my work with the independence of a one-man army. Beyond freelancing, I co-founded <strong>Intasia</strong> (a service-based startup) as Lead Developer and launched <strong>Quix</strong>, my own product-based startup — both of which shaped my skills as a builder and entrepreneur. Keeping up with emerging technologies and AI tools is a genuine passion of mine."</p>
         
         <!-- Testimonial -->
         <div class="testi">
@@ -1194,7 +1345,7 @@ footer{
             </div>
             <div class="id-body">
               <div class="id-name">Hema</div>
-              <div class="id-title-badge">Web Designer &amp; Dev</div>
+              <div class="id-title-badge">Founder &amp; Developer</div>
             </div>
             
           </div>
@@ -1219,6 +1370,7 @@ footer{
       <button class="f-tab" data-filter="landing">Landing Pages</button>
       <button class="f-tab" data-filter="portfolio">Portfolios</button>
       <button class="f-tab" data-filter="graphic">Graphic Designs</button>
+      <button class="f-tab" data-filter="web">Startups</button>
     </div>
 
     <!-- Projects grid -->
@@ -1226,9 +1378,9 @@ footer{
       <div class="projects-grid" id="projectsGrid">
 
        <!-- Project 1 -->
-        <div class="proj-card visible" data-cat="landing">
+        <div class="proj-card proj-stack-hidden visible" data-cat="landing">
           <div class="proj-img">
-            <div class="proj-icon"><img src="career finder.png" alt="career finder" ></div>
+            <div class="proj-icon"><img src="career finder.png" alt="career finder"></div>
             <span class="proj-img-label">landing page</span>
           </div>
           <div class="proj-body">
@@ -1247,7 +1399,7 @@ footer{
           </div>
         </div>
 <!-- Project 1 -->
-        <div class="proj-card visible" data-cat="landing">
+        <div class="proj-card proj-stack-hidden visible" data-cat="landing">
           <div class="proj-img">
             <div class="proj-icon"><img src="if.png" alt="Gym Website"></div>
             <span class="proj-img-label">gym website</span>
@@ -1267,14 +1419,14 @@ footer{
           </div>
         </div>
         <!-- Project 1 -->
-        <div class="proj-card visible" data-cat="landing">
+        <!-- <div class="proj-card proj-stack-hidden visible" data-cat="landing">
           <div class="proj-img">
             <div class="proj-icon"><img src="dm.png" alt="Digital Marketing Course" ></div>
             <span class="proj-img-label">Landing Page</span>
           </div>
           <div class="proj-body">
             <div class="proj-cat">digital marketing course</div>
-            <div class="proj-name">free course</div>
+            <div class="proj-name">Digital Marketing Course</div>
             <p class="proj-desc">A beginner-friendly free Digital Marketing course</p>
           </div>
           <div class="proj-footer">
@@ -1285,9 +1437,9 @@ footer{
             </div>
             <a href="https://hemayuva308-rgb.github.io/dm-free-course/" class="proj-link">View →</a>
           </div>
-        </div>
+        </div>  -->
         <!-- Aurum Bistro Project -->
-<div class="proj-card visible" data-cat="web">
+<div class="proj-card proj-stack-hidden visible" data-cat="landing">
   <div class="proj-img">
     <div class="proj-icon"><img src="aurum-bistro.png" alt="Aurum Bistro"></div>
     <span class="proj-img-label">Luxury Restaurant Website</span>
@@ -1319,14 +1471,14 @@ footer{
   </div>
 </div>
         <!-- Project 1 -->
-        <div class="proj-card visible" data-cat="portfolio">
+        <div class="proj-card proj-stack-hidden visible" data-cat="portfolio">
           <div class="proj-img">
             <div class="proj-icon"><img src="hema.png" alt="portfolio"></div>
             <span class="proj-img-label">portfolio</span>
           </div>
           <div class="proj-body">
             <div class="proj-cat">personal portfolio</div>
-            <div class="proj-name">Hema Yuva</div>
+            <div class="proj-name">Hema</div>
             <p class="proj-desc">A modern, responsive portfolio website showcasing my work and skills.</p>
           </div>
           <div class="proj-footer">
@@ -1339,7 +1491,7 @@ footer{
           </div>
         </div>
 <!-- Project 1 -->
-<div class="proj-card visible" data-cat="ecommerce">
+<div class="proj-card proj-stack-hidden visible" data-cat="ecommerce">
   <div class="proj-img">
     <div class="proj-icon"><img src="scube3d.png" alt="scube3d"></div>
     <span class="proj-img-label">E-Commerce Store</span>
@@ -1364,9 +1516,79 @@ footer{
   </div>
 </div>
 
+        <!-- Project: Intasia -->
+        <div class="proj-card proj-stack-hidden" data-cat="web">
+          <div class="proj-img">
+           <div class="proj-icon"><img src="intasia.png" alt="Intasia"></div>
+            <span class="proj-img-label">Service Startup</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-cat">Startup · Web Platform</div>
+            <div class="proj-name">Intasia</div>
+            <p class="proj-desc">Co-founded a service-based startup delivering professional web design and digital solutions to businesses. Led the development of client-facing products, internal tools, and the brand platform from ground up.</p>
+          </div>
+          <div class="proj-footer">
+            
+            <a href="https://intasia-com.vercel.app/" class="proj-link">viwe →</a>
+          </div>
+        </div>
+        <!-- Project: Quix -->
+        <div class="proj-card proj-stack-hidden" data-cat="web">
+          <div class="proj-img">
+           <div class="proj-icon"><img src="quix.png" alt="Quix"></div>
+            <span class="proj-img-label">Product Startup</span>
+          </div>
+          <div class="proj-body">
+            <div class="proj-cat">Startup · SaaS Product</div>
+            <div class="proj-name">Quix</div>
+            <p class="proj-desc">Founded Quix, a product-based startup aimed at helping small businesses and freelancers streamline their digital presence. Built the MVP, product strategy, and user-facing interface as founder and sole developer.</p>
+          </div>
+          <div class="proj-footer">
+            
+            <a href="#" class="proj-link">Soon →</a>
+          </div>
+        </div>
+
       </div><!-- /projects-grid -->
     </div><!-- /projects-grid-wrap -->
 
+  </div>
+</section>
+
+<!-- ══════════════════ VENTURES ══════════════════ -->
+<section id="ventures">
+  <div class="s-inner">
+    <span class="s-eyebrow reveal">My Startups</span>
+    <h2 class="s-title reveal">Ventures &amp; Startups</h2>
+    <p class="s-sub reveal">Beyond client work, I co-founded and launched ventures that let me build, lead, and ship products from zero.</p>
+
+    <div class="ventures-grid">
+
+      <!-- Intasia -->
+      <div class="venture-card reveal">
+        <div class="venture-badge">
+          <span class="venture-badge-dot"></span>
+          Service-Based Startup
+        </div>
+        <div class="venture-name">Intasia</div>
+        <div class="venture-role">Co-Founder &amp; Lead Developer</div>
+        <p class="venture-desc">Intasia is a service-based startup delivering professional web design, development, and digital marketing solutions to businesses of all sizes. As Co-Founder and Lead Developer, I spearheaded the technical vision — building client products, internal workflows, and the company's own brand presence. Intasia brought together a team of creatives focused on turning business ideas into polished digital experiences.</p>
+        
+      </div>
+
+      <!-- Quix -->
+      <div class="venture-card reveal" style="transition-delay:0.12s;">
+        <div class="venture-badge">
+          <span class="venture-badge-dot"></span>
+          Product-Based Startup
+        </div>
+        <div class="venture-name">Quix</div>
+        <div class="venture-role">Founder</div>
+        <p class="venture-desc">Quix is a product-based startup I founded to help freelancers and small businesses establish a strong digital presence quickly and affordably. From ideation to MVP, I handled product strategy, design, and development solo — building a SaaS platform that streamlines site creation and client management. Quix reflects my belief that powerful tools should be accessible to everyone, not just big teams.</p>
+        
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1467,9 +1689,9 @@ footer{
       <span class="s-eyebrow">Let's talk</span>
       <h2 class="s-title">Ready to start<br/>your project?</h2>
       <p class="s-sub">Book a free  call. No pressure, no commitment — just a clear conversation about what you need and how I can help.</p>
-      <a href="https://forms.google.com" target="_blank" class="btn-light">Book a Free Call →</a>
+      <a href="https://forms.gle/tABMiBQ56u3RxFcb6" target="_blank" class="btn-light">Book a Free Call →</a>
       <div class="contact-alts">
-        <a href="https://wa.me/919941116919" target="_blank" class="contact-link">
+        <a href="https://forms.gle/QbnY2gza19cJozHo9" target="_blank" class="contact-link">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           WhatsApp
         </a>
@@ -1614,6 +1836,11 @@ document.querySelectorAll(".reveal, .reveal-left, .reveal-pop, .stagger-children
         requestAnimationFrame(function () {
           card.classList.remove("hidden");
           card.classList.add("visible");
+          // Also ensure stack animation shows it
+          if (!card.classList.contains("proj-stack-visible")) {
+            card.classList.remove("proj-stack-hidden");
+            card.classList.add("proj-stack-visible");
+          }
         });
       } else {
         card.classList.remove("visible");
@@ -1660,6 +1887,33 @@ document.querySelectorAll(".reveal, .reveal-left, .reveal-pop, .stagger-children
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
+})();
+
+/* ═══════════════════════════════════════
+   PROJECT CARDS — SCROLL STACK REVEAL
+═══════════════════════════════════════ */
+(function () {
+  var projCards = document.querySelectorAll(".proj-card");
+  var projObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        // Find index among visible (non-hidden) cards and stagger
+        var visibleCards = Array.from(projCards).filter(function (c) {
+          return !c.classList.contains("hidden");
+        });
+        var idx = visibleCards.indexOf(e.target);
+        var rowPos = idx % 3;
+        e.target.style.transitionDelay = (rowPos * 0.12) + "s";
+        e.target.classList.add("proj-stack-visible");
+        e.target.classList.remove("proj-stack-hidden");
+        projObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+
+  projCards.forEach(function (card) {
+    projObs.observe(card);
+  });
 })();
 
 /* ═══════════════════════════════════════
